@@ -5,6 +5,7 @@ import com.example.spring_equals_test1.domain.User;
 import com.example.spring_equals_test1.repository.TeamRepository;
 import com.example.spring_equals_test1.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,6 +19,7 @@ public class Controller {
     private UserRepository userRepository;
 
     @GetMapping("/test1")
+    @Transactional
     public void test1() {
         Team team = teamRepository.findByTitle("1조");
 
@@ -31,6 +33,7 @@ public class Controller {
 
 
     @GetMapping("/test2")
+    @Transactional
     public void test2() {
         System.out.println("User 를 먼저 불러오고, Team을 불러왔을 때는 동일성을 보장받습니다.");
         User user = userRepository.findByName("김덕철");
@@ -41,6 +44,7 @@ public class Controller {
     }
 
     @GetMapping("/test3")
+    @Transactional
     public void test3() {
         System.out.println("그런데, Team을 먼저 불러오고 User 를 불러올 때에는 동일성을 보장 받지 못 합니다. 동일한 순서로 불러온 test1 번 코드는 정상 동작 합니다.");
         Team team = teamRepository.findByTitle("1조");
